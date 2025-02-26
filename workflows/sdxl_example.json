@@ -1,0 +1,760 @@
+{
+  "last_node_id": 49,
+  "last_link_id": 70,
+  "nodes": [
+    {
+      "id": 32,
+      "type": "PrimitiveNode",
+      "pos": [
+        460,
+        180
+      ],
+      "size": [
+        338.24078369140625,
+        179.58128356933594
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            47,
+            48
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "text_g"
+          }
+        }
+      ],
+      "title": "negative",
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        "blurry, animation, 3d render, illustration, toy, puppet, claymation, low quality, flag, nasa, mission patch"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 31,
+      "type": "PrimitiveNode",
+      "pos": [
+        460,
+        -90
+      ],
+      "size": [
+        338.24078369140625,
+        179.58128356933594
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            45,
+            46
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "text_g"
+          }
+        }
+      ],
+      "title": "positive",
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        "Photo of an athlete cat explaining it’s latest scandal at a press conference to journalists."
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 39,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2441.885986328125,
+        318.9952087402344
+      ],
+      "size": [
+        626.912353515625,
+        328.0433654785156
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 55,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "slot_index": 0,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "{\n  \"results\": [\n    {\n      \"index\": 2,\n      \"avg_rank\": 1.6666666666666667,\n      \"scores\": {\n        \"clip\": 0.39698827266693115,\n        \"image_reward\": 1.5831878185272217,\n        \"qwen_vlm_verifier\": 8.5\n      }\n    },\n    {\n      \"index\": 1,\n      \"avg_rank\": 2.0,\n      \"scores\": {\n        \"clip\": 0.38969576358795166,\n        \"image_reward\": 1.5144425630569458,\n        \"qwen_vlm_verifier\": 8.5\n      }\n    },\n    {\n      \"index\": 5,\n      \"avg_rank\": 3.3333333333333335,\n      \"scores\": {\n        \"clip\": 0.3850914537906647,\n        \"image_reward\": 1.4853371381759644,\n        \"qwen_vlm_verifier\": 8.5\n      }\n    }\n  ]\n}"
+      ]
+    },
+    {
+      "id": 38,
+      "type": "PreviewImage",
+      "pos": [
+        2319.653076171875,
+        -148.6650848388672
+      ],
+      "size": [
+        1034.1004638671875,
+        342.83056640625
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 54
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 30,
+      "type": "CLIPTextEncodeSDXL",
+      "pos": [
+        860,
+        -120
+      ],
+      "size": [
+        220,
+        220
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 49
+        },
+        {
+          "name": "text_g",
+          "type": "STRING",
+          "link": 45,
+          "slot_index": 1,
+          "widget": {
+            "name": "text_g"
+          }
+        },
+        {
+          "name": "text_l",
+          "type": "STRING",
+          "link": 46,
+          "widget": {
+            "name": "text_l"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            58
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeSDXL"
+      },
+      "widgets_values": [
+        4096,
+        4096,
+        0,
+        0,
+        4096,
+        4096,
+        "Photo of an athlete cat explaining it’s latest scandal at a press conference to journalists.",
+        "Photo of an athlete cat explaining it’s latest scandal at a press conference to journalists."
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -27,
+        62
+      ],
+      "size": [
+        398.7421875,
+        98
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            60
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            49,
+            50
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            61
+          ],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "sd_xl_base_1.0.safetensors"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 33,
+      "type": "CLIPTextEncodeSDXL",
+      "pos": [
+        860,
+        160
+      ],
+      "size": [
+        220,
+        220
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 50
+        },
+        {
+          "name": "text_g",
+          "type": "STRING",
+          "link": 47,
+          "slot_index": 1,
+          "widget": {
+            "name": "text_g"
+          }
+        },
+        {
+          "name": "text_l",
+          "type": "STRING",
+          "link": 48,
+          "widget": {
+            "name": "text_l"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            62
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeSDXL"
+      },
+      "widgets_values": [
+        4096,
+        4096,
+        0,
+        0,
+        4096,
+        4096,
+        "blurry, animation, 3d render, illustration, toy, puppet, claymation, low quality, flag, nasa, mission patch",
+        "blurry, animation, 3d render, illustration, toy, puppet, claymation, low quality, flag, nasa, mission patch"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        860,
+        440
+      ],
+      "size": [
+        220,
+        106
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            63
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 37,
+      "type": "PreviewImage",
+      "pos": [
+        2484.226806640625,
+        -689.171875
+      ],
+      "size": [
+        485.0599060058594,
+        565.9942016601562
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 53
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 41,
+      "type": "LoadCLIPScoreVerifier",
+      "pos": [
+        1262.6259765625,
+        76.61262512207031
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "clip_verifier_instance",
+          "type": "CS_VERIFIER",
+          "links": [
+            64
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadCLIPScoreVerifier"
+      },
+      "widgets_values": [
+        "openai/clip-vit-base-patch32",
+        "cuda"
+      ]
+    },
+    {
+      "id": 42,
+      "type": "LoadImageRewardVerifier",
+      "pos": [
+        1180.7288818359375,
+        218.1554718017578
+      ],
+      "size": [
+        393,
+        82
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "image_reward_verifier_instance",
+          "type": "IR_VERIFIER",
+          "links": [
+            56
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImageRewardVerifier"
+      },
+      "widgets_values": [
+        "ImageReward-v1.0",
+        "cuda"
+      ]
+    },
+    {
+      "id": 36,
+      "type": "LoadQwenVLMVerifier",
+      "pos": [
+        1307.015380859375,
+        378.5606994628906
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "qwen_verifier_instance",
+          "type": "QWN_VERIFIER",
+          "links": [
+            66
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadQwenVLMVerifier"
+      },
+      "widgets_values": [
+        "Qwen/Qwen2.5-VL-7B-Instruct",
+        "cuda"
+      ]
+    },
+    {
+      "id": 40,
+      "type": "InferenceTimeScaler",
+      "pos": [
+        1607.334228515625,
+        -243.672119140625
+      ],
+      "size": [
+        544.199951171875,
+        504
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 60
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 61
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 58
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 62
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 63
+        },
+        {
+          "name": "loaded_clip_score_verifier",
+          "type": "CS_VERIFIER",
+          "link": 64,
+          "shape": 7
+        },
+        {
+          "name": "loaded_image_reward_verifier",
+          "type": "IR_VERIFIER",
+          "link": 56,
+          "shape": 7
+        },
+        {
+          "name": "loaded_qwen_verifier",
+          "type": "QWN_VERIFIER",
+          "link": 66,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Best Image",
+          "type": "IMAGE",
+          "links": [
+            53
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "Top-k Grid",
+          "type": "IMAGE",
+          "links": [
+            54
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "Top-k Score(s)",
+          "type": "STRING",
+          "links": [
+            55
+          ],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InferenceTimeScaler"
+      },
+      "widgets_values": [
+        1120880422120323,
+        "randomize",
+        25,
+        6.5,
+        "dpmpp_sde",
+        "exponential",
+        1,
+        "random",
+        "Photo of an athlete cat explaining it’s latest scandal at a press conference to journalists.",
+        6,
+        3,
+        3,
+        0.9500000000000001
+      ]
+    }
+  ],
+  "links": [
+    [
+      45,
+      31,
+      0,
+      30,
+      1,
+      "STRING"
+    ],
+    [
+      46,
+      31,
+      0,
+      30,
+      2,
+      "STRING"
+    ],
+    [
+      47,
+      32,
+      0,
+      33,
+      1,
+      "STRING"
+    ],
+    [
+      48,
+      32,
+      0,
+      33,
+      2,
+      "STRING"
+    ],
+    [
+      49,
+      4,
+      1,
+      30,
+      0,
+      "CLIP"
+    ],
+    [
+      50,
+      4,
+      1,
+      33,
+      0,
+      "CLIP"
+    ],
+    [
+      53,
+      40,
+      0,
+      37,
+      0,
+      "IMAGE"
+    ],
+    [
+      54,
+      40,
+      1,
+      38,
+      0,
+      "IMAGE"
+    ],
+    [
+      55,
+      40,
+      2,
+      39,
+      0,
+      "STRING"
+    ],
+    [
+      56,
+      42,
+      0,
+      40,
+      6,
+      "IR_VERIFIER"
+    ],
+    [
+      58,
+      30,
+      0,
+      40,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      60,
+      4,
+      0,
+      40,
+      0,
+      "MODEL"
+    ],
+    [
+      61,
+      4,
+      2,
+      40,
+      1,
+      "VAE"
+    ],
+    [
+      62,
+      33,
+      0,
+      40,
+      3,
+      "CONDITIONING"
+    ],
+    [
+      63,
+      5,
+      0,
+      40,
+      4,
+      "LATENT"
+    ],
+    [
+      64,
+      41,
+      0,
+      40,
+      5,
+      "CS_VERIFIER"
+    ],
+    [
+      66,
+      36,
+      0,
+      40,
+      7,
+      "QWN_VERIFIER"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7627768444385489,
+      "offset": [
+        -2.847368291296239,
+        765.5074707149945
+      ]
+    },
+    "node_versions": {
+      "comfyui-custom-scripts": "1.0.0",
+      "comfy-core": "0.3.14",
+      "inferencescale": "7638b2108ffdd85db5c7a218f278f4fdb5350bb4"
+    }
+  },
+  "version": 0.4
+}
