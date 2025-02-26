@@ -1,0 +1,857 @@
+{
+  "last_node_id": 63,
+  "last_link_id": 220,
+  "nodes": [
+    {
+      "id": 50,
+      "type": "PreviewImage",
+      "pos": [
+        2612.57275390625,
+        -218.29470825195312
+      ],
+      "size": [
+        485.0599060058594,
+        565.9942016601562
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 215
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 35,
+      "type": "PrimitiveNode",
+      "pos": [
+        613.6879272460938,
+        423.773193359375
+      ],
+      "size": [
+        210,
+        82
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            113,
+            114
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "height"
+          }
+        }
+      ],
+      "title": "height",
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        1024,
+        "fixed"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 34,
+      "type": "PrimitiveNode",
+      "pos": [
+        614.6919555664062,
+        293.5925598144531
+      ],
+      "size": [
+        210,
+        82
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            112,
+            115
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "width"
+          }
+        }
+      ],
+      "title": "width",
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        1024,
+        "fixed"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 30,
+      "type": "ModelSamplingFlux",
+      "pos": [
+        875.9307250976562,
+        429.4948425292969
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 56,
+          "slot_index": 0
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 115,
+          "slot_index": 1,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 114,
+          "slot_index": 2,
+          "widget": {
+            "name": "height"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            207
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingFlux"
+      },
+      "widgets_values": [
+        1.15,
+        0.5,
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": 26,
+      "type": "FluxGuidance",
+      "pos": [
+        1192.878173828125,
+        49.71302795410156
+      ],
+      "size": [
+        317.4000244140625,
+        58
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 41
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            208,
+            209
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        3.5
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        534.9801025390625,
+        610.8826293945312
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            56
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev.safetensors",
+        "default"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        326.43499755859375,
+        9.09113883972168
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            10
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux",
+        "default"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        1190.246826171875,
+        181.4082794189453
+      ],
+      "size": [
+        311.81634521484375,
+        60.429901123046875
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            211
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.safetensors"
+      ]
+    },
+    {
+      "id": 27,
+      "type": "EmptySD3LatentImage",
+      "pos": [
+        880.8555297851562,
+        274.9820251464844
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 112,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 113,
+          "widget": {
+            "name": "height"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            210
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptySD3LatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 51,
+      "type": "PreviewImage",
+      "pos": [
+        2336.53125,
+        381.6529541015625
+      ],
+      "size": [
+        1034.1004638671875,
+        342.83056640625
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 216
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 59,
+      "type": "LoadCLIPScoreVerifier",
+      "pos": [
+        1359.62939453125,
+        556.8392333984375
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "clip_verifier_instance",
+          "type": "CS_VERIFIER",
+          "links": [
+            218
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadCLIPScoreVerifier"
+      },
+      "widgets_values": [
+        "openai/clip-vit-base-patch32",
+        "cuda"
+      ]
+    },
+    {
+      "id": 57,
+      "type": "LoadImageRewardVerifier",
+      "pos": [
+        1323.9488525390625,
+        691.6572875976562
+      ],
+      "size": [
+        393,
+        82
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "image_reward_verifier_instance",
+          "type": "IR_VERIFIER",
+          "links": [
+            219
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImageRewardVerifier"
+      },
+      "widgets_values": [
+        "ImageReward-v1.0",
+        "cuda"
+      ]
+    },
+    {
+      "id": 52,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2557.12158203125,
+        763.6514892578125
+      ],
+      "size": [
+        626.912353515625,
+        328.0433654785156
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 217,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "{\n  \"results\": [\n    {\n      \"index\": 1,\n      \"avg_rank\": 1.3333333333333333,\n      \"scores\": {\n        \"clip\": 0.37650811672210693,\n        \"image_reward\": 1.8367176055908203,\n        \"qwen_vlm_verifier\": 8.5\n      }\n    },\n    {\n      \"index\": 2,\n      \"avg_rank\": 2.3333333333333335,\n      \"scores\": {\n        \"clip\": 0.3695143163204193,\n        \"image_reward\": 1.8028672933578491,\n        \"qwen_vlm_verifier\": 8.5\n      }\n    },\n    {\n      \"index\": 0,\n      \"avg_rank\": 3.3333333333333335,\n      \"scores\": {\n        \"clip\": 0.38637128472328186,\n        \"image_reward\": 1.332296371459961,\n        \"qwen_vlm_verifier\": 8.0\n      }\n    }\n  ]\n}"
+      ]
+    },
+    {
+      "id": 55,
+      "type": "LoadQwenVLMVerifier",
+      "pos": [
+        1357.2117919921875,
+        819.9663696289062
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "qwen_verifier_instance",
+          "type": "QWN_VERIFIER",
+          "links": [
+            220
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadQwenVLMVerifier"
+      },
+      "widgets_values": [
+        "Qwen/Qwen2.5-VL-7B-Instruct",
+        "cuda"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        703.3018798828125,
+        -3.6757407188415527
+      ],
+      "size": [
+        422.84503173828125,
+        164.31304931640625
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            41
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "CLIP Text Encode (Positive Prompt)",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Photo of an athlete cat explaining it’s latest scandal at a press conference to journalists."
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 61,
+      "type": "InferenceTimeScaler",
+      "pos": [
+        1765.8800048828125,
+        169.56472778320312
+      ],
+      "size": [
+        544.199951171875,
+        504
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 207
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 211
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 208
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 209
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 210
+        },
+        {
+          "name": "loaded_clip_score_verifier",
+          "type": "CS_VERIFIER",
+          "link": 218,
+          "shape": 7
+        },
+        {
+          "name": "loaded_image_reward_verifier",
+          "type": "IR_VERIFIER",
+          "link": 219,
+          "shape": 7
+        },
+        {
+          "name": "loaded_qwen_verifier",
+          "type": "QWN_VERIFIER",
+          "link": 220,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Best Image",
+          "type": "IMAGE",
+          "links": [
+            215
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "Top-k Grid",
+          "type": "IMAGE",
+          "links": [
+            216
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "Top-k Score(s)",
+          "type": "STRING",
+          "links": [
+            217
+          ],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InferenceTimeScaler"
+      },
+      "widgets_values": [
+        599535346220184,
+        "randomize",
+        20,
+        1,
+        "euler",
+        "normal",
+        1,
+        "random",
+        "Photo of an athlete cat explaining it’s latest scandal at a press conference to journalists.",
+        6,
+        3,
+        3,
+        0.9500000000000001
+      ]
+    }
+  ],
+  "links": [
+    [
+      10,
+      11,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      41,
+      6,
+      0,
+      26,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      56,
+      12,
+      0,
+      30,
+      0,
+      "MODEL"
+    ],
+    [
+      112,
+      34,
+      0,
+      27,
+      0,
+      "INT"
+    ],
+    [
+      113,
+      35,
+      0,
+      27,
+      1,
+      "INT"
+    ],
+    [
+      114,
+      35,
+      0,
+      30,
+      2,
+      "INT"
+    ],
+    [
+      115,
+      34,
+      0,
+      30,
+      1,
+      "INT"
+    ],
+    [
+      207,
+      30,
+      0,
+      61,
+      0,
+      "MODEL"
+    ],
+    [
+      208,
+      26,
+      0,
+      61,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      209,
+      26,
+      0,
+      61,
+      3,
+      "CONDITIONING"
+    ],
+    [
+      210,
+      27,
+      0,
+      61,
+      4,
+      "LATENT"
+    ],
+    [
+      211,
+      10,
+      0,
+      61,
+      1,
+      "VAE"
+    ],
+    [
+      215,
+      61,
+      0,
+      50,
+      0,
+      "IMAGE"
+    ],
+    [
+      216,
+      61,
+      1,
+      51,
+      0,
+      "IMAGE"
+    ],
+    [
+      217,
+      61,
+      2,
+      52,
+      0,
+      "STRING"
+    ],
+    [
+      218,
+      59,
+      0,
+      61,
+      5,
+      "CS_VERIFIER"
+    ],
+    [
+      219,
+      57,
+      0,
+      61,
+      6,
+      "IR_VERIFIER"
+    ],
+    [
+      220,
+      55,
+      0,
+      61,
+      7,
+      "QWN_VERIFIER"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7627768444385489,
+      "offset": [
+        114.5124773926392,
+        424.3442940893145
+      ]
+    },
+    "groupNodes": {},
+    "node_versions": {
+      "comfy-core": "0.3.14",
+      "inferencescale": "219749ce1dfcb2f93ed46b816824fe2d67497be3",
+      "comfyui-custom-scripts": "1.0.0"
+    }
+  },
+  "version": 0.4
+}

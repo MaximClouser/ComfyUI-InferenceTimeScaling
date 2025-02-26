@@ -13,6 +13,8 @@ A ComfyUI extension implementing "Inference-time scaling for diffusion models be
   - VLM grading using Qwen2.5-VL-7B
 - Automated model downloading and management
 
+![Example Workflow](workflows/flux_example.png)
+
 ## Installation
 
 ### Prerequisites
@@ -132,6 +134,9 @@ Loads the ImageReward model for image quality assessment.
 
 - [ ] Add batch processing support for image generation (performance optimization)
 - [ ] Implement batched verification for multiple image-text pairs (speed optimization)
+- [ ] Enable configurable scoring criteria for Qwen VLM verifier (currently only uses overall score)
+  - Allow users to select specific aspects like visual quality, creativity, etc.
+  - Support weighted combinations of multiple scoring criteria
 
 ## Development
 
