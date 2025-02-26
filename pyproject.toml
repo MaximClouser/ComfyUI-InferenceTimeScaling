@@ -7,7 +7,7 @@ name = "ComfyUI-InferenceTimeScaling"
 version = "0.0.1"
 description = "Inference-time diffusion scaling"
 authors = [
-  {name = "Max Clouser", email = "maximclouser@gmail.com"}
+  {name = "Max Clouser", email = "max@yrikka.com"}
 ]
 readme = "README.md"
 license = {text = "MIT license"}
@@ -27,8 +27,8 @@ dev = [
 ]
 
 [project.urls]
-bugs = "https://github.com/MaximClouser/ComfyUI-InferenceTimeScaling/issues"
-homepage = "https://github.com/MaximClouser/ComfyUI-InferenceTimeScaling"
+bugs = "https://github.com/YRIKKA/ComfyUI-InferenceTimeScaling/issues"
+homepage = "https://github.com/YRIKKA/ComfyUI-InferenceTimeScaling"
 
 
 [tool.comfy]

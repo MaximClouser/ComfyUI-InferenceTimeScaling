@@ -48,7 +48,7 @@ This was developed and tested on a system with:
 #### Manual Installation
 ```bash
 cd ComfyUI/custom_nodes
-git clone https://github.com/MaximClouser/ComfyUI-InferenceTimeScaling
+git clone https://github.com/YRIKKA/ComfyUI-InferenceTimeScaling
 cd ComfyUI-InferenceScale
 pip install -e .
 ```
