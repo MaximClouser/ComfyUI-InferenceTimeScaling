@@ -19,6 +19,8 @@ A ComfyUI extension implementing "Inference-time scaling for diffusion models be
 
 ![Example Workflow](workflows/flux_example.png)
 
+*Simple example using FLUX-1 Dev with random search for 6 rounds*
+
 [View example workflows](workflows/)
 
 ## Installation
