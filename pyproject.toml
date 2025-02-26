@@ -32,7 +32,7 @@ homepage = "https://github.com/MaximClouser/inferencescale"
 
 
 [tool.comfy]
-PublisherId = "MaximClouser"
+PublisherId = "maximclouser"
 DisplayName = "InferenceScale"
 Icon = ""
 
