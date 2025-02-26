@@ -4,6 +4,8 @@ A ComfyUI extension implementing "Inference-time scaling for diffusion models be
 
 ![Athletic Cat](assets/athletic_cat.png)
 
+*Prompt: "Photo of an athlete cat explaining it's latest scandal at a press conference to journalists."*
+
 ## Features
 
 - Implementation of two search algorithms from the paper:
@@ -16,6 +18,8 @@ A ComfyUI extension implementing "Inference-time scaling for diffusion models be
 - Automated model downloading and management
 
 ![Example Workflow](workflows/flux_example.png)
+
+[View example workflows](workflows/)
 
 ## Installation
 
