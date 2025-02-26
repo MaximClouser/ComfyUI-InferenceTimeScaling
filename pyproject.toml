@@ -3,9 +3,9 @@ requires = ["setuptools>=70.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "inferencescale"
+name = "ComfyUI-InferenceTimeScaling"
 version = "0.0.1"
-description = "inference diffusion scaling"
+description = "Inference-time diffusion scaling"
 authors = [
   {name = "Max Clouser", email = "maximclouser@gmail.com"}
 ]
@@ -27,13 +27,13 @@ dev = [
 ]
 
 [project.urls]
-bugs = "https://github.com/MaximClouser/inferencescale/issues"
-homepage = "https://github.com/MaximClouser/inferencescale"
+bugs = "https://github.com/MaximClouser/ComfyUI-InferenceTimeScaling/issues"
+homepage = "https://github.com/MaximClouser/ComfyUI-InferenceTimeScaling"
 
 
 [tool.comfy]
 PublisherId = "maximclouser"
-DisplayName = "InferenceScale"
+DisplayName = "ComfyUI-InferenceTimeScaling"
 Icon = ""
 
 [tool.setuptools.package-data]

@@ -78,9 +78,9 @@ def common_ksampler(model, seed, steps, cfg, sampler_name, scheduler, positive, 
 def rank_candidates(results_by_verifier, num_candidates):
     """
     results_by_verifier: {
-       'clip': [score0, score1, ...],
-       'image_reward': [...],
-       'qwen_vlm_verifier': [...],
+       'clip': [score0, score1, ...], # Scores for each image from CLIP
+       'image_reward': [...], # Scores from ImageReward
+       'qwen_vlm_verifier': [...], # Scores from Qwen
        ...
     }
     Convert each verifier's raw scores into ranks (best=rank 1), then compute
@@ -175,8 +175,7 @@ def score_candidates(candidate_tensors: List[torch.Tensor], text_prompt: str, ve
 
 def rank_from_raw_scores(raw_scores_list):
     """
-    Converts a list of raw score dictionaries into a ranked list
-    using the existing ranking mechanism.
+    Converts a list of raw score dictionaries into a ranked list.
     """
     # Build a verifier-to-scores dictionary from the raw_scores_list
     results_by_verifier = {}
