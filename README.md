@@ -107,6 +107,8 @@ Loads the Qwen VLM verifier model for image evaluation.
 #### Outputs:
 - `qwen_verifier_instance`: Loaded Qwen verifier instance
 
+The model will be downloaded automatically on first use (you do not need to have these weights locally beforehand).
+
 ### LoadCLIPScoreVerifier Node
 
 Loads the CLIP model for computing text-image similarity scores.
@@ -120,6 +122,8 @@ Loads the CLIP model for computing text-image similarity scores.
 #### Outputs:
 - `clip_verifier_instance`: Loaded CLIP verifier instance
 
+The model will be downloaded automatically on first use (you do not need to have these weights locally beforehand).
+
 ### LoadImageRewardVerifier Node
 
 Loads the ImageReward model for image quality assessment.
@@ -132,6 +136,8 @@ Loads the ImageReward model for image quality assessment.
 
 #### Outputs:
 - `image_reward_verifier_instance`: Loaded ImageReward verifier instance
+
+The model will be downloaded automatically on first use (you do not need to have these weights locally beforehand).
 
 ## Example Workflow
 
