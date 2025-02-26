@@ -1,6 +1,6 @@
-# ComfyUI-InferenceScale
+# ComfyUI-InferenceTimeScaling
 
-A ComfyUI extension implementing "Inference-time scaling for diffusion models beyond scaling denoising steps" (Ma et al., 2025). This extension provides advanced inference-time optimization techniques to improve image generation quality through random search and zero-order optimization algorithms, along with an ensemble verification system.
+A ComfyUI extension implementing "Inference-time scaling for diffusion models beyond scaling denoising steps" ([Ma et al., 2025](https://arxiv.org/abs/2501.09732)). This extension provides advanced inference-time optimization techniques to improve image generation quality through random search and zero-order optimization algorithms, along with an ensemble verification system.
 
 ## Features
 
@@ -32,7 +32,7 @@ A ComfyUI extension implementing "Inference-time scaling for diffusion models be
 #### Manual Installation
 ```bash
 cd ComfyUI/custom_nodes
-git clone https://github.com/your-username/ComfyUI-InferenceScale
+git clone https://github.com/MaximClouser/ComfyUI-InferenceTimeScaling
 cd ComfyUI-InferenceScale
 pip install -e .
 ```
