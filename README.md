@@ -1,6 +1,6 @@
 # ComfyUI-InferenceTimeScaling
 
-A ComfyUI extension implementing "Inference-time scaling for diffusion models beyond scaling denoising steps" ([Ma et al., 2025](https://arxiv.org/abs/2501.09732)). This extension provides advanced inference-time optimization techniques to improve image generation quality through random search and zero-order optimization algorithms, along with an ensemble verification system.
+A ComfyUI extension implementing "Inference-time scaling for diffusion models beyond scaling denoising steps" ([Ma et al., 2025](https://arxiv.org/abs/2501.09732)). This extension provides inference-time optimization techniques to enhance diffusion-based image generation quality through random search and zero-order optimization algorithms, along with an ensemble verification system.
 
 ## Features
 
@@ -19,6 +19,12 @@ A ComfyUI extension implementing "Inference-time scaling for diffusion models be
 
 1. Install [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
 2. Install [ComfyUI-Manager](https://github.com/ltdrdata/ComfyUI-Manager)
+
+### Hardware Requirements
+
+This was developed and tested on a system with:
+- Single NVIDIA L40S GPU (48GB VRAM)
+- 62GB System RAM
 
 ### Installation Methods
 
@@ -116,6 +122,16 @@ Loads the ImageReward model for image quality assessment.
 3. Connect everything to the InferenceTimeScaler node
 4. Set your desired search algorithm and parameters
 5. Generate optimized images with improved quality
+
+## Current Limitations
+
+- Single latent processing only (batch size = 1) - performance limitation
+- Sequential verification (one image-text pair at a time) - speed bottleneck
+
+## Future Work
+
+- [ ] Add batch processing support for image generation (performance optimization)
+- [ ] Implement batched verification for multiple image-text pairs (speed optimization)
 
 ## Development
 
