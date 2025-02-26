@@ -41,7 +41,7 @@ This was developed and tested on a system with:
 #### Using ComfyUI-Manager (Recommended)
 1. Open ComfyUI
 2. Open the Manager panel
-3. Search for "InferenceScale"
+3. Search for "ComfyUI-InferenceTimeScaling"
 4. Click "Install"
 5. Restart ComfyUI
 
@@ -49,7 +49,7 @@ This was developed and tested on a system with:
 ```bash
 cd ComfyUI/custom_nodes
 git clone https://github.com/YRIKKA/ComfyUI-InferenceTimeScaling
-cd ComfyUI-InferenceScale
+cd ComfyUI-InferenceTimeScaling
 pip install -e .
 ```
 

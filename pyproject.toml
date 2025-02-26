@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ComfyUI-InferenceTimeScaling"
 version = "0.0.1"
-description = "Inference-time diffusion scaling"
+description = "Inference-time techniques to enhance diffusion-based image generation quality through random search and zero-order optimization algorithms"
 authors = [
   {name = "Max Clouser", email = "max@yrikka.com"}
 ]
