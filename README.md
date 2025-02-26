@@ -61,6 +61,8 @@ The extension adds the following nodes to ComfyUI:
 
 This is the main node implementing the random search and zero-order optimization algorithms from the paper.
 
+![InferenceTimeScaler Node](assets/inference_scaler_node.jpeg)
+
 #### Inputs:
 - `model`: (MODEL) Denoising model
 - `seed`: (INT) Random seed for reproducibility
@@ -96,6 +98,8 @@ This is the main node implementing the random search and zero-order optimization
 
 Loads the Qwen VLM verifier model for image evaluation.
 
+![Qwen VLM Verifier Node](assets/qwen_verifier_node.jpeg)
+
 #### Inputs:
 - `qwen_verifier_id`: Model identifier (default: "Qwen/Qwen2.5-VL-7B-Instruct")
 - `device`: Device to load model on ("cuda" or "cpu")
@@ -107,6 +111,8 @@ Loads the Qwen VLM verifier model for image evaluation.
 
 Loads the CLIP model for computing text-image similarity scores.
 
+![CLIP Score Verifier Node](assets/clip_verifier_node.jpeg)
+
 #### Inputs:
 - `clip_verifier_id`: Model identifier (default: "openai/clip-vit-base-patch32")
 - `device`: Device to load model on ("cuda" or "cpu")
@@ -117,6 +123,8 @@ Loads the CLIP model for computing text-image similarity scores.
 ### LoadImageRewardVerifier Node
 
 Loads the ImageReward model for image quality assessment.
+
+![ImageReward Verifier Node](assets/image_reward_node.jpeg)
 
 #### Inputs:
 - `ir_verifier_id`: Model identifier (default: "ImageReward-v1.0")
