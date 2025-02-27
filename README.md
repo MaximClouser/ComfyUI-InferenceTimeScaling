@@ -25,7 +25,21 @@ A ComfyUI extension implementing "Inference-time scaling for diffusion models be
 
 ## How It Works
 
-It uses random search and zero-order search to explore different noises and a verifier ensemble (ImageReward, CLIP, and a VLM grader using Qwen 2.5 7b/3b/72b) to generate the best image. By exploring the noise space, it finds a better starting seed and produces images of higher quality and better prompt alignment than simply increasing denoising steps, with the tradeoff being increased time and compute during inference.
+This extension implements two different search algorithms to find the best possible image for your prompt:
+
+1. **Random Search**: The simplest approach - generates multiple images with different random noises and evaluates them to explore the noise space.
+
+2. **Zero-Order Search**: A more sophisticated approach that performs local optimization. It starts with a random noise, generates nearby variations by perturbing noise, and iteratively moves toward better results based on evaluation.
+
+To explore the noise space, the quality of generated images is evaluated using an ensemble of three verifiers:
+
+- **CLIP Score**: Measures how well the image matches the text prompt using OpenAI's CLIP model
+- **ImageReward**: Evaluates image quality and prompt alignment using a specialized reward model
+- **Qwen VLM**: Uses a large vision-language model to provide detailed scoring across multiple aspects (visual quality, creativity, prompt accuracy, etc.)
+
+By exploring the noise space and using these verifiers to guide the search, it can produce images of higher quality and better prompt alignment than simply increasing denoising steps, with the tradeoff being increased time and compute during inference.
+
+For more detailed information about the algorithms and methodology, please refer to the original paper from Google DeepMind: ["Inference-time scaling for diffusion models beyond scaling denoising steps"](https://arxiv.org/abs/2501.09732).
 
 ## Installation
 
