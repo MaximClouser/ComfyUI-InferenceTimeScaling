@@ -1,4 +1,5 @@
 # ComfyUI-InferenceTimeScaling
+![Version](https://img.shields.io/badge/version-0.0.3-blue.svg)
 
 A ComfyUI extension implementing "Inference-time scaling for diffusion models beyond scaling denoising steps" ([Ma et al., 2025](https://arxiv.org/abs/2501.09732)). This extension provides inference-time optimization techniques to enhance diffusion-based image generation quality through random search and zero-order optimization algorithms, along with an ensemble verification system.
 
