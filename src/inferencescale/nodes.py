@@ -149,7 +149,7 @@ def score_candidates(candidate_tensors: List[torch.Tensor], text_prompt: str, ve
                             elif verifier_name == "image_reward":
                                 score = verifier.score(text_prompt, pil_img)
                             elif verifier_name == "qwen_vlm_verifier":
-                                score = verifier.get_overall_score(pil_img, text_prompt)
+                                score = verifier.score(pil_img, text_prompt)
                             else:
                                 logger.warning(f"Unknown verifier type: {verifier_name}")
                                 continue
@@ -435,13 +435,19 @@ class LoadQwenVLMVerifier:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "qwen_verifier_id": (["Qwen/Qwen2.5-VL-7B-Instruct", None], {
+                "qwen_verifier_id": (["Qwen/Qwen2.5-VL-7B-Instruct", "Qwen/Qwen2.5-VL-3B-Instruct", "Qwen/Qwen2.5-VL-72B-Instruct"], {
                     "default": "Qwen/Qwen2.5-VL-7B-Instruct",
                     "tooltip": "Identifier for the Qwen VLM model."
                 }),
                 "device": ("STRING", {
                     "default": "cuda" if torch.cuda.is_available() else "cpu",
                     "tooltip": "Device to load the model onto."
+                }),
+                "score_type": (["overall_score", "accuracy_to_prompt", "creativity_and_originality", 
+                               "visual_quality_and_realism", "consistency_and_cohesion", 
+                               "emotional_or_thematic_resonance"], {
+                    "default": "overall_score",
+                    "tooltip": "Type of score to return from the Qwen model evaluation."
                 })
             }
         }
@@ -452,7 +458,7 @@ class LoadQwenVLMVerifier:
     CATEGORY = "InferenceTimeScaling"
     DESCRIPTION = "Loads the Qwen VLM verifier model. Downloads it if necessary."
 
-    def execute(self, qwen_verifier_id, device):
+    def execute(self, qwen_verifier_id, device, score_type):
         # Construct a local comfyui checkpoint path for the model
         model_checkpoint = os.path.join(folder_paths.models_dir, "LLM", os.path.basename(qwen_verifier_id))
         if not os.path.exists(model_checkpoint):
@@ -461,7 +467,7 @@ class LoadQwenVLMVerifier:
                 local_dir=model_checkpoint,
                 local_dir_use_symlinks=False,
             )
-        verifier_instance = QwenVLMVerifier(qwen_verifier_id, device)
+        verifier_instance = QwenVLMVerifier(model_checkpoint, device, score_type=score_type)
         return (verifier_instance,)
 
 
@@ -489,7 +495,10 @@ class LoadCLIPScoreVerifier:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "clip_verifier_id": (["openai/clip-vit-base-patch32", "openai/clip-vit-large-patch14", None], {
+                "clip_verifier_id": (["openai/clip-vit-base-patch32", 
+                                     "openai/clip-vit-large-patch14",
+                                     "openai/clip-vit-base-patch16", 
+                                     "openai/clip-vit-large-patch14-336"], {
                     "default": "openai/clip-vit-base-patch32",
                     "tooltip": "Identifier for the CLIP model."
                 }),
@@ -528,7 +537,7 @@ class LoadImageRewardVerifier:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "ir_verifier_id": (["ImageReward-v1.0", None], {
+                "ir_verifier_id": (["ImageReward-v1.0"], {
                     "default": "ImageReward-v1.0",
                     "tooltip": "Identifier for the ImageReward model."
                 }),

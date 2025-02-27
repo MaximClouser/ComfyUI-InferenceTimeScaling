@@ -1,4 +1,5 @@
 # ComfyUI-InferenceTimeScaling
+![Version](https://img.shields.io/badge/version-0.0.3-blue.svg)
 
 A ComfyUI extension implementing "Inference-time scaling for diffusion models beyond scaling denoising steps" ([Ma et al., 2025](https://arxiv.org/abs/2501.09732)). This extension provides inference-time optimization techniques to enhance diffusion-based image generation quality through random search and zero-order optimization algorithms, along with an ensemble verification system.
 
@@ -22,6 +23,24 @@ A ComfyUI extension implementing "Inference-time scaling for diffusion models be
 *Simple example using FLUX-1 Dev with random search for 6 rounds*
 
 [View example workflows](workflows/)
+
+## How It Works
+
+This extension implements two different search algorithms to find the best possible image for your prompt:
+
+1. **Random Search**: The simplest approach - generates multiple images with different random noises and evaluates them to explore the noise space.
+
+2. **Zero-Order Search**: A more sophisticated approach that performs local optimization. It starts with a random noise, generates nearby variations by perturbing noise, and iteratively moves toward better results based on evaluation.
+
+To explore the noise space, the quality of generated images is evaluated using an ensemble of three verifiers:
+
+- **CLIP Score**: Measures how well the image matches the text prompt using OpenAI's CLIP model
+- **ImageReward**: Evaluates image quality and prompt alignment using a specialized reward model
+- **Qwen VLM**: Uses a large vision-language model to provide detailed scoring across multiple aspects (visual quality, creativity, prompt accuracy, etc.)
+
+By exploring the noise space and using these verifiers to guide the search, it can produce images of higher quality and better prompt alignment than simply increasing denoising steps, with the tradeoff being increased time and compute during inference.
+
+For more detailed information about the algorithms and methodology, please refer to the original paper from Google DeepMind: ["Inference-time scaling for diffusion models beyond scaling denoising steps"](https://arxiv.org/abs/2501.09732).
 
 ## Installation
 
@@ -79,15 +98,19 @@ This is the main node implementing the random search and zero-order optimization
 - `vae`: (VAE) VAE model for decoding latents
 - `view_top_k`: (INT) Number of top images to show in grid
 - `search_algorithm`: Choice between "random" and "zero-order"
-- `num_neighbors`: (INT) Number of neighbors per iteration in zero-order search (only used if search_algorithm is "zero-order")
-- `lambda_threshold`: (FLOAT) Perturbation step size for zero-order search (only used if search_algorithm is "zero-order")
+
+> [!IMPORTANT]
+> The following parameters are **only used for zero-order search** and have no effect when using random search:
+> - `num_neighbors`: (INT) Number of neighbors per iteration in zero-order search
+> - `lambda_threshold`: (FLOAT) Perturbation step size for zero-order search
 
 #### Optional Inputs:
 - `loaded_clip_score_verifier`: (CS_VERIFIER) CLIP model for scoring
 - `loaded_image_reward_verifier`: (IR_VERIFIER) ImageReward model
 - `loaded_qwen_verifier`: (QWN_VERIFIER) Qwen VLM model
 
-**Note:** At least one verifier must be included!
+> [!NOTE]
+> The verifiers are optional - you can choose which ones to use by connecting them to the node. However, at least one verifier must be connected for the node to function!
 
 #### Outputs:
 - `Best Image`: The highest-scoring generated image
@@ -103,6 +126,13 @@ Loads the Qwen VLM verifier model for image evaluation.
 #### Inputs:
 - `qwen_verifier_id`: Model identifier (default: "Qwen/Qwen2.5-VL-7B-Instruct")
 - `device`: Device to load model on ("cuda" or "cpu")
+- `score_type`: Type of score to return from the evaluation (default: "overall_score"). Options:
+  - `overall_score`: Weighted average of all aspects
+  - `accuracy_to_prompt`: How well the image matches the text description
+  - `creativity_and_originality`: Uniqueness and creative interpretation
+  - `visual_quality_and_realism`: Overall visual quality, detail, and realism
+  - `consistency_and_cohesion`: Internal consistency and natural composition
+  - `emotional_or_thematic_resonance`: How well the image captures the intended mood/theme
 
 #### Outputs:
 - `qwen_verifier_instance`: Loaded Qwen verifier instance
@@ -154,21 +184,13 @@ The model will be downloaded automatically on first use (you do not need to have
 
 ## Future Work
 
+- [x] Enable configurable scoring criteria for Qwen VLM verifier
+  - Allow users to select specific aspects like visual quality, creativity, etc.
+  - Support individual aspect scoring
 - [ ] Add batch processing support for image generation (performance optimization)
 - [ ] Implement batched verification for multiple image-text pairs (speed optimization)
-- [ ] Enable configurable scoring criteria for Qwen VLM verifier (currently only uses overall score)
-  - Allow users to select specific aspects like visual quality, creativity, etc.
-  - Support weighted combinations of multiple scoring criteria
+- [ ] Add support for image-to-image and image+text conditioning to image models (currently only supports text-to-image models)
 
-## Development
-
-To install development dependencies:
-
-```bash
-cd inferencescale
-pip install -e .[dev]
-pre-commit install
-```
 
 ## License
 
