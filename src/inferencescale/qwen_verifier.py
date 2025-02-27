@@ -82,11 +82,25 @@ class Grading(BaseModel):
 
 class QwenVLMVerifier():
 
-    def __init__(self, model_name, device='cpu'):
+    def __init__(self, model_name, device='cpu', score_type='overall_score'):
         logger.info(f"Initializing QwenVLMVerifier with model {model_name} on device {device}")
         self.model_name = model_name
         self.device = device
-        self.dtype = torch.float16 if "cuda" in self.device else torch.float16
+        self.dtype = torch.float16
+        
+        # Validate score_type
+        valid_score_types = {
+            'accuracy_to_prompt',
+            'creativity_and_originality',
+            'visual_quality_and_realism',
+            'consistency_and_cohesion',
+            'emotional_or_thematic_resonance',
+            'overall_score'
+        }
+        if score_type not in valid_score_types:
+            raise ValueError(f"Invalid score_type. Must be one of: {valid_score_types}")
+        
+        self.score_type = score_type
         self.load_model()
 
 
@@ -96,28 +110,14 @@ class QwenVLMVerifier():
             min_pixels = 256 * 28 * 28
             max_pixels = 1280 * 28 * 28
 
-            logger.debug(f"Loading model from {self.model_name}")
-            model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-                self.model_name, 
-                torch_dtype=self.dtype, 
-                device_map="auto",
-                low_cpu_mem_usage=True
-            )
-            logger.info("Model loaded successfully")
-
-            logger.debug("Loading processor")
-            processor = AutoProcessor.from_pretrained(
-                self.model_name, min_pixels=min_pixels, max_pixels=max_pixels
-            )
-            logger.info("Processor loaded successfully")
-
             logger.debug("Initializing transformers vision")
             self.qwen_model = transformers_vision(
                 self.model_name,
-                model_class=model.__class__,
+                model_class=Qwen2_5_VLForConditionalGeneration,
                 device=self.device,
                 model_kwargs={"torch_dtype": self.dtype},
-                processor_class=processor.__class__,
+                processor_class=AutoProcessor,
+                processor_kwargs={"min_pixels": min_pixels, "max_pixels": max_pixels}
             )
             logger.info("Transformers vision initialized")
 
@@ -125,8 +125,6 @@ class QwenVLMVerifier():
             self.structured_qwen_generator = outlines.generate.json(self.qwen_model, Grading)
             logger.info("Structured generator setup complete")
 
-            del model 
-            del processor
             torch.cuda.empty_cache()
             gc.collect()
             logger.info("Memory cleanup completed")
@@ -173,21 +171,20 @@ class QwenVLMVerifier():
             raise
 
 
-    def get_overall_score(self, image, prompt: str, max_tokens: int = None, seed: int = 42) -> float:
-        # TODO Extend to handle any score key (instead of just overall score) as input
-        logger.info("Getting overall score")
+    def score(self, image, prompt: str, max_tokens: int = None, seed: int = 42) -> float:
+        logger.info(f"Getting {self.score_type} score")
         try:
             outputs = self.query_model(image, prompt, max_tokens, seed)
-            overall_score = outputs["overall_score"]["score"]
+            score = outputs[self.score_type]["score"]
 
-            if overall_score:
-                logger.debug(f"Overall score calculated: {overall_score}")
-                return float(overall_score)
+            if score is not None:
+                logger.debug(f"{self.score_type} score calculated: {score}")
+                return float(score)
 
-            logger.warning("Overall score not found in model output")
+            logger.warning(f"{self.score_type} score not found in model output")
             return 0.0
         except Exception as e:
-            logger.error(f"Error getting overall score: {str(e)}", exc_info=True)
+            logger.error(f"Error getting {self.score_type} score: {str(e)}", exc_info=True)
             return 0.0
 
 
@@ -196,35 +193,15 @@ if __name__ == "__main__":
     
     model_name = "Qwen/Qwen2.5-VL-7B-Instruct"
     
-    model = QwenVLMVerifier(model_name=model_name, device=device)
-    # model.load_model()
+    model = QwenVLMVerifier(model_name=model_name, device=device, score_type='visual_quality_and_realism')
     
     image_path = "596F6DF4-2856-436E-A981-649ABFB15F1B.jpeg"
     image = Image.open(image_path).convert("RGB")
 
     test_prompt = "A red bird and a fish."
     
-    response = model.query_model(image, test_prompt)
-    print("Model Response:", response)
-
-    aspect_keys = [
-        "accuracy_to_prompt",
-        "creativity_and_originality",
-        "visual_quality_and_realism",
-        "consistency_and_cohesion",
-        "emotional_or_thematic_resonance"
-    ]
-    
-    scores = []
-    for key in aspect_keys:
-        if key in response and "score" in response[key]:
-            scores.append(response[key]["score"])
-    
-    if scores:
-        average_score = sum(scores) / len(scores)
-        print("Average Score:", average_score)
-    else:
-        print("No scores found to average.")
+    visual_quality_score = model.score(image, test_prompt)
+    print(f"Visual quality score: {visual_quality_score}")
 
     # model.to_device('cpu')
     # model.to_device('cuda')
@@ -232,5 +209,5 @@ if __name__ == "__main__":
     response = model.query_model(image, test_prompt)
     print("Model Response:", response)
 
-    overall_score = model.get_overall_score(image, test_prompt)
+    overall_score = model.score(image, test_prompt)
     print(f"Overall score: {overall_score}")

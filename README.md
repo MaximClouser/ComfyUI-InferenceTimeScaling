@@ -23,6 +23,10 @@ A ComfyUI extension implementing "Inference-time scaling for diffusion models be
 
 [View example workflows](workflows/)
 
+## How It Works
+
+It uses random search and zero-order search to explore different noises and a verifier ensemble (ImageReward, CLIP, and a VLM grader using Qwen 2.5 7b/3b/72b) to generate the best image. By exploring the noise space, it finds a better starting seed and produces images of higher quality and better prompt alignment than simply increasing denoising steps, with the tradeoff being increased time and compute during inference.
+
 ## Installation
 
 ### Prerequisites
@@ -79,15 +83,19 @@ This is the main node implementing the random search and zero-order optimization
 - `vae`: (VAE) VAE model for decoding latents
 - `view_top_k`: (INT) Number of top images to show in grid
 - `search_algorithm`: Choice between "random" and "zero-order"
-- `num_neighbors`: (INT) Number of neighbors per iteration in zero-order search (only used if search_algorithm is "zero-order")
-- `lambda_threshold`: (FLOAT) Perturbation step size for zero-order search (only used if search_algorithm is "zero-order")
+
+> [!IMPORTANT]
+> The following parameters are **only used for zero-order search** and have no effect when using random search:
+> - `num_neighbors`: (INT) Number of neighbors per iteration in zero-order search
+> - `lambda_threshold`: (FLOAT) Perturbation step size for zero-order search
 
 #### Optional Inputs:
 - `loaded_clip_score_verifier`: (CS_VERIFIER) CLIP model for scoring
 - `loaded_image_reward_verifier`: (IR_VERIFIER) ImageReward model
 - `loaded_qwen_verifier`: (QWN_VERIFIER) Qwen VLM model
 
-**Note:** At least one verifier must be included!
+> [!NOTE]
+> The verifiers are optional - you can choose which ones to use by connecting them to the node. However, at least one verifier must be connected for the node to function!
 
 #### Outputs:
 - `Best Image`: The highest-scoring generated image
@@ -103,6 +111,13 @@ Loads the Qwen VLM verifier model for image evaluation.
 #### Inputs:
 - `qwen_verifier_id`: Model identifier (default: "Qwen/Qwen2.5-VL-7B-Instruct")
 - `device`: Device to load model on ("cuda" or "cpu")
+- `score_type`: Type of score to return from the evaluation (default: "overall_score"). Options:
+  - `overall_score`: Weighted average of all aspects
+  - `accuracy_to_prompt`: How well the image matches the text description
+  - `creativity_and_originality`: Uniqueness and creative interpretation
+  - `visual_quality_and_realism`: Overall visual quality, detail, and realism
+  - `consistency_and_cohesion`: Internal consistency and natural composition
+  - `emotional_or_thematic_resonance`: How well the image captures the intended mood/theme
 
 #### Outputs:
 - `qwen_verifier_instance`: Loaded Qwen verifier instance
@@ -154,21 +169,13 @@ The model will be downloaded automatically on first use (you do not need to have
 
 ## Future Work
 
+- [x] Enable configurable scoring criteria for Qwen VLM verifier
+  - Allow users to select specific aspects like visual quality, creativity, etc.
+  - Support individual aspect scoring
 - [ ] Add batch processing support for image generation (performance optimization)
 - [ ] Implement batched verification for multiple image-text pairs (speed optimization)
-- [ ] Enable configurable scoring criteria for Qwen VLM verifier (currently only uses overall score)
-  - Allow users to select specific aspects like visual quality, creativity, etc.
-  - Support weighted combinations of multiple scoring criteria
+- [ ] Add support for image-to-image and image+text conditioning to image models (currently only supports text-to-image models)
 
-## Development
-
-To install development dependencies:
-
-```bash
-cd inferencescale
-pip install -e .[dev]
-pre-commit install
-```
 
 ## License
 
