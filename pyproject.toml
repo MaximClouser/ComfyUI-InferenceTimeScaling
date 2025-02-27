@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ComfyUI-InferenceTimeScaling"
-version = "0.0.1"
+version = "0.0.2"
 description = "Inference-time techniques to enhance diffusion-based image generation quality through random search and zero-order optimization algorithms"
 authors = [
   {name = "Max Clouser", email = "max@yrikka.com"}
@@ -13,7 +13,19 @@ readme = "README.md"
 license = {text = "MIT license"}
 classifiers = []
 dependencies = [
-
+    "torch>=2.5.1",
+    "torchvision>=0.20.1",
+    "transformers==4.49.0",
+    "pillow==11.1.0",
+    "numpy>=1.24.0",
+    "huggingface_hub==0.27.1",
+    "timm==0.6.13",
+    "fairscale>=0.4.0",
+    "image_reward==1.5",
+    "pydantic==2.10.6",
+    "outlines==0.2.0",
+    "open-clip-torch>=2.20.0",
+    "clip @ git+https://github.com/openai/CLIP.git"
 ]
 
 [project.optional-dependencies]
